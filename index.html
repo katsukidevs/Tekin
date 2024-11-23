@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <title>Kin to Kin – It's Tekin!</title>
     <style>
         body {
@@ -10,36 +10,51 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            background-color: #f4f4f4;
         }
+
         header {
             background-color: #4CAF50;
             color: white;
-            padding: 10px;
+            padding: 15px;
             text-align: center;
         }
+
+        header h1 {
+            margin: 0;
+        }
+
         nav {
             display: flex;
-            justify-content: space-around;
+            flex-direction: column;
             background-color: #333;
-            padding: 10px;
+            padding: 15px;
+            text-align: center;
         }
+
         nav button {
             color: white;
             background-color: #4CAF50;
             border: none;
-            padding: 10px 15px;
+            padding: 12px 15px;
             cursor: pointer;
             border-radius: 5px;
+            margin: 5px;
+            width: 80%;
         }
+
         nav button:hover {
             background-color: #45a049;
         }
+
         .container {
             padding: 20px;
         }
+
         .hidden {
             display: none;
         }
+
         .item {
             border: 1px solid #ddd;
             padding: 10px;
@@ -47,16 +62,55 @@
             border-radius: 5px;
             background: #f9f9f9;
         }
+
         button {
             background-color: #007bff;
             color: white;
             border: none;
-            padding: 10px 15px;
+            padding: 12px 20px;
             border-radius: 5px;
             cursor: pointer;
+            width: 100%;
         }
+
         button:hover {
             background-color: #0056b3;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            height: 150px;
+        }
+
+        input[type="text"], input[type="url"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        /* Media queries for portrait orientation */
+        @media only screen and (max-width: 600px) {
+            header h1 {
+                font-size: 24px;
+            }
+
+            nav button {
+                width: 90%;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            textarea {
+                height: 120px;
+            }
         }
     </style>
 </head>
@@ -65,6 +119,7 @@
         <h1>Kin to Kin – It's Tekin!</h1>
         <p>Share freely, help others. We're one family!</p>
     </header>
+
     <nav>
         <button onclick="showSection('home')">Home</button>
         <button onclick="showSection('browse')">Browse Items</button>
@@ -72,19 +127,23 @@
         <button onclick="showSection('myListings')">My Listings</button>
         <button onclick="showSection('help')">Help/Report</button>
     </nav>
+
     <div id="home" class="container">
         <h2>Welcome to Kin to Kin!</h2>
         <p>Start by browsing items or posting your own for others to claim.</p>
     </div>
+
     <div id="browse" class="container hidden">
         <h2>Browse Items</h2>
         <div id="itemsContainer"></div>
     </div>
+
     <div id="post" class="container hidden">
         <h2>Post an Item</h2>
         <form id="postForm">
             <label>Item Name:</label><br>
             <input type="text" id="itemName" required><br><br>
+
             <label>Category:</label><br>
             <select id="itemCategory">
                 <option value="Clothing">Clothing</option>
@@ -93,23 +152,29 @@
                 <option value="Books">Books</option>
                 <option value="Other">Other</option>
             </select><br><br>
+
             <label>Description:</label><br>
             <textarea id="itemDescription" required></textarea><br><br>
+
             <label>Image URL:</label><br>
             <input type="url" id="itemImage" required><br><br>
+
             <button type="submit">Submit</button>
         </form>
     </div>
+
     <div id="myListings" class="container hidden">
         <h2>My Listings</h2>
         <div id="myItemsContainer"></div>
     </div>
+
     <div id="help" class="container hidden">
         <h2>Help/Report</h2>
         <p>If you encounter any issues or need assistance, please contact our support team.</p>
         <textarea id="reportIssue" placeholder="Describe your issue"></textarea><br><br>
         <button onclick="submitReport()">Submit Report</button>
     </div>
+
     <script src="app.js"></script>
 </body>
 </html>
