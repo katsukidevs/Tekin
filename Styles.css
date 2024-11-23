@@ -1,0 +1,194 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f4f4f4;
+    transition: background-color 0.3s ease;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-right: 20px; /* Adjusted to align properly */
+}
+
+nav {
+    display: flex;
+    overflow-x:hidden;
+    background-color: #333;
+    padding: 10px;
+    justify-content: start;
+    position: fixed;
+    top: 60px; /* Adjusted to make sure the nav is below the header */
+    width: 100%;
+    z-index: 100;
+    background: #fff;
+    margin-bottom: 10px;
+}
+
+nav button {
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    padding: 12px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 5px;
+    white-space: nowrap;
+    min-width: 80px;
+}
+
+nav button:hover {
+    background-color: #45a000;
+}
+
+/* Updated container padding to create space for both header and nav */
+.container {
+    padding: 120px 20px 20px; /* Increased padding-top to account for header + nav */
+}
+
+.hidden {
+    display: none;
+}
+
+.item-grid {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px; /* Space between items */
+}
+
+.item {
+    width: 100%; /* Make each item take the full width */
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f9f9f9;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.item:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.item img {
+    max-width: 100%;
+    height: auto;
+}
+
+.cart-button, .request-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.cart-button:hover, .request-button:hover {
+    background-color: #0056b3;
+}
+
+.details-button {
+    background-color: #ff9900;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.details-button:hover {
+    background-color: #e68a00;
+}
+
+.floating-cart-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+/* Toast notification */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    opacity: 0;
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        bottom: 10px;
+    }
+    100% {
+        opacity: 1;
+        bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    header h1 {
+        font-size: 18px;
+    }
+
+    nav button {
+        width: 90%;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .item {
+        width: calc(50% - 20px); /* Adjust item width for smaller screens */
+    }
+
+    .floating-cart-btn {
+        bottom: 15px;
+        right: 15px;
+        font-size: 20px;
+    }
+}
