@@ -1,82 +1,144 @@
-// Initialize dummy data
-let items = [];
-let myListings = [];
+// Array to store items added to the cart
+let cart = [];
 
-// Function to show/hide sections
-function showSection(section) {
-    document.querySelectorAll('.container').forEach(container => {
-        container.classList.add('hidden');
-    });
-    document.getElementById(section).classList.remove('hidden');
+// Function to display the profile section
+function showProfile() {
+    document.getElementById('profile').classList.remove('hidden');
+    hideSectionsExcept(['profile']);
 }
 
-// Function to render items in "Browse Items"
-function renderItems() {
+// Function to display different sections
+function showSection(sectionId) {
+    const sections = ['browse', 'post', 'cart', 'help', 'profile'];
+    sections.forEach(section => {
+        document.getElementById(section).classList.add('hidden');
+    });
+    document.getElementById(sectionId).classList.remove('hidden');
+}
+
+// Function to hide all sections except the ones passed
+function hideSectionsExcept(visibleSections) {
+    const sections = ['browse', 'post', 'cart', 'help', 'profile'];
+    sections.forEach(section => {
+        if (!visibleSections.includes(section)) {
+            document.getElementById(section).classList.add('hidden');
+        }
+    });
+}
+
+// Mock items for the browse section
+const items = [
+    {
+        name: "Vintage Denim Jacket",
+        category: "Clothing",
+        description: "A classic vintage denim jacket, great condition.",
+        image: "https://via.placeholder.com/150",
+        price: "Free"
+    },
+    {
+        name: "Smartphone - iPhone 12",
+        category: "Electronics",
+        description: "A lightly used iPhone 12 with minor scratches.",
+        image: "https://via.placeholder.com/150",
+        price: "Free"
+    },
+    {
+        name: "Wooden Coffee Table",
+        category: "Furniture",
+        description: "A sturdy, wooden coffee table in excellent shape.",
+        image: "https://via.placeholder.com/150",
+        price: "Free"
+    },
+    {
+        name: "The Great Gatsby - Hardcover",
+        category: "Books",
+        description: "A well-preserved hardcover edition of 'The Great Gatsby'.",
+        image: "https://via.placeholder.com/150",
+        price: "Free"
+    }
+];
+
+// Function to populate the items on the browse page
+function populateItems() {
     const container = document.getElementById('itemsContainer');
-    container.innerHTML = '';
     items.forEach((item, index) => {
         const itemDiv = document.createElement('div');
-        itemDiv.className = 'item';
+        itemDiv.classList.add('item');
+
         itemDiv.innerHTML = `
-            <h4>${item.name}</h4>
+            <img src="${item.image}" alt="${item.name}">
+            <h3>${item.name}</h3>
             <p><strong>Category:</strong> ${item.category}</p>
-            <p>${item.description}</p>
-            <img src="${item.image}" alt="${item.name}" style="max-width: 100%;"><br>
-            <button onclick="requestItem(${index})">Request</button>
+            <p><strong>Description:</strong> ${item.description}</p>
+            <p><strong>Price:</strong> ${item.price}</p>
+            <button class="details-button">View Details</button>
+            <button class="add-to-cart-button" onclick="addToCart(${index})">Add to Cart</button>
         `;
+
         container.appendChild(itemDiv);
     });
 }
 
-// Function to add a new item
-document.getElementById('postForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('itemName').value;
-    const category = document.getElementById('itemCategory').value;
-    const description = document.getElementById('itemDescription').value;
-    const image = document.getElementById('itemImage').value;
-
-    const newItem = { name, category, description, image };
-    items.push(newItem);
-    myListings.push(newItem);
-
-    alert('Item posted successfully!');
-    renderItems();
-    showSection('myListings');
-});
-
-// Function to render user's listings
-function renderMyListings() {
-    const container = document.getElementById('myItemsContainer');
-    container.innerHTML = '';
-    myListings.forEach(item => {
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'item';
-        itemDiv.innerHTML = `
-            <h4>${item.name}</h4>
-            <p><strong>Category:</strong> ${item.category}</p>
-            <p>${item.description}</p>
-            <img src="${item.image}" alt="${item.name}" style="max-width: 100%;"><br>
-        `;
-        container.appendChild(itemDiv);
-    });
+// Function to handle adding items to the cart
+function addToCart(itemIndex) {
+    const item = items[itemIndex];
+    cart.push(item);
+    showToast(`${item.name} has been added to your cart!`);
+    updateCartDisplay();
 }
 
-// Request Item Function
-function requestItem(index) {
-    alert(`You've requested: ${items[index].name}. The giver will be notified!`);
+// Function to show a toast message
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.classList.add('toast');
+    toast.textContent = message;
+
+    document.body.appendChild(toast);
+
+    // Remove the toast after 3 seconds
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
 }
 
-// Submit Report
-function submitReport() {
-    const issue = document.getElementById('reportIssue').value;
-    if (!issue.trim()) {
-        alert('Please describe the issue.');
-        return;
+// Function to update the cart display
+function updateCartDisplay() {
+    const cartContainer = document.getElementById('cartItems');
+    cartContainer.innerHTML = ''; // Clear the cart container
+
+    if (cart.length === 0) {
+        cartContainer.innerHTML = '<p>Your cart is empty.</p>';
+    } else {
+        cart.forEach(item => {
+            const cartItemDiv = document.createElement('div');
+            cartItemDiv.classList.add('item');
+            cartItemDiv.innerHTML = `
+                <img src="${item.image}" alt="${item.name}">
+                <h3>${item.name}</h3>
+                <p><strong>Category:</strong> ${item.category}</p>
+                <p><strong>Price:</strong> ${item.price}</p>
+            `;
+            cartContainer.appendChild(cartItemDiv);
+        });
     }
-    alert('Thank you for your report. We will review it shortly.');
 }
 
-// Initial Render
-renderItems();
-renderMyListings();
+// Function to handle clearing the cart
+function clearCart() {
+    cart = [];
+    showToast("Your cart has been cleared.");
+    updateCartDisplay();
+}
+
+// Function to handle the logout action (dummy for now)
+function logout() {
+    showToast("Logged out!");
+}
+
+// Function to handle the report submission (dummy for now)
+function submitReport() {
+    showToast("Your report has been submitted.");
+}
+
+// Call the function to populate the items on page load
+populateItems();
