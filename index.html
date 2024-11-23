@@ -4,243 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <title>Kin to Kin – It's Tekin!</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: #f4f4f4;
-            transition: background-color 0.3s ease;
-        }
-
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-        }
-
-        nav {
-            display: flex;
-            flex-direction: column;
-            background-color: #333;
-            padding: 15px;
-            text-align: center;
-        }
-
-        nav button {
-            color: white;
-            background-color: #4CAF50;
-            border: none;
-            padding: 12px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin: 5px;
-            width: 80%;
-        }
-
-        nav button:hover {
-            background-color: #45a049;
-        }
-
-        .container {
-            padding: 20px;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .item {
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            background: #f9f9f9;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            width: calc(50% - 20px);
-            margin-right: 10px;
-            box-sizing: border-box;
-        }
-
-        .item:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .item img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .item-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        .cart-button, .request-button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            transition: background-color 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .cart-button:hover, .request-button:hover {
-            background-color: #0056b3;
-        }
-
-        .details-button {
-            background-color: #ff9900;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            width: 100%;
-        }
-
-        .details-button:hover {
-            background-color: #e68a00;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-        }
-
-        .modal-button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
-        }
-
-        .modal-button:hover {
-            background-color: #45a049;
-        }
-
-        /* Profile and Login Section */
-        #profileSection {
-            text-align: center;
-        }
-
-        #profileSection button {
-            margin-top: 15px;
-        }
-
-        /* Cart Section */
-        #cartSection {
-            background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-
-        #cartSection p {
-            margin-bottom: 15px;
-        }
-
-        /* Floating Cart Button */
-        .floating-cart-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #ff5722;
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0px 4px 6px rgba(0,0,0,0.2);
-            z-index: 1000;
-        }
-
-        /* Responsive Design */
-        @media only screen and (max-width: 600px) {
-            header h1 {
-                font-size: 24px;
-            }
-
-            nav button {
-                width: 90%;
-            }
-
-            .container {
-                padding: 15px;
-            }
-
-            .item {
-                width: calc(50% - 20px);
-                margin-bottom: 15px;
-            }
-
-            textarea {
-                height: 120px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
         <h1>Kin to Kin – It's Tekin!</h1>
-        <p>Share freely, help others. We're one family!</p>
+        <img class="profile-icon" src="https://via.placeholder.com/40" alt="Profile" onclick="showProfile()">
     </header>
-
+    <div>
     <nav>
-        <button onclick="showSection('home')">Home</button>
         <button onclick="showSection('browse')">Browse Items</button>
         <button onclick="showSection('post')">Post an Item</button>
-        <button onclick="showSection('profile')">Profile</button>
+        <button onclick="showSection('cart')">My Cart</button>
         <button onclick="showSection('help')">Help/Report</button>
     </nav>
-
-    <div id="home" class="container">
-        <h2>Welcome to Kin to Kin!</h2>
-        <p>Start by browsing items or posting your own for others to claim.</p>
-        <button class="cart-button" onclick="loginWithTelegram()">Login with Telegram</button>
     </div>
-
     <div id="profile" class="container hidden">
         <h2>Your Profile</h2>
-        <p><strong>Name:</strong> John Doe</p>
-        <p><strong>Joined:</strong> 1st Jan, 2024</p>
+        <p>Logged in via Telegram</p>
         <button class="cart-button" onclick="showSection('cart')">View Cart</button>
+        <button class="cart-button" onclick="logout()">Log Out</button>
     </div>
 
     <div id="browse" class="container hidden">
         <h2>Browse Items</h2>
-        <div id="itemCategoryFilter"></div>
-
         <div class="item-grid" id="itemsContainer"></div>
     </div>
 
@@ -270,124 +57,24 @@
 
             <button type="submit">Submit</button>
         </form>
+        <p id="postMessage" style="color: green; font-weight: bold; display: none;">Your post has been sent for review!</p>
     </div>
 
     <div id="cart" class="container hidden">
         <h2>My Cart</h2>
-        <div id="cartSection">
-            <p>No items in cart</p>
-        </div>
-        <button onclick="clearCart()">Clear Cart</button>
+        <div id="cartItems"></div>
+        <button onclick="clearCart()" class="cart-button">Clear Cart</button>
     </div>
 
     <div id="help" class="container hidden">
-        <h2>Help/Report</h2>
+        <h2>Report an Issue</h2>
         <p>If you see any issue with an item or user, report it here:</p>
         <textarea id="reportIssue"></textarea><br><br>
         <button onclick="submitReport()">Submit Report</button>
     </div>
 
-    <!-- Item Details Modal -->
-    <div class="modal" id="itemModal">
-        <div class="modal-content">
-            <h3 id="modalItemName"></h3>
-            <p><strong>Category:</strong> <span id="modalItemCategory"></span></p>
-            <p><strong>Description:</strong> <span id="modalItemDescription"></span></p>
-            <img id="modalItemImage" src="" alt="" style="width: 100px; height: 100px;">
-            <p><strong>Price:</strong> <span id="modalItemPrice"></span></p>
-            <button class="modal-button" onclick="closeModal()">Close</button>
-            <button class="request-button" onclick="requestItem()">Request Item</button>
-        </div>
-    </div>
-
-    <!-- Floating Cart Button -->
     <button class="floating-cart-btn" onclick="showSection('cart')">🛒</button>
 
-    <script>
-        let items = [];
-        let cart = [];
-
-        function showSection(section) {
-            const sections = ['home', 'browse', 'post', 'cart', 'profile', 'help'];
-            sections.forEach(s => {
-                document.getElementById(s).classList.add('hidden');
-            });
-            document.getElementById(section).classList.remove('hidden');
-        }
-
-        function loginWithTelegram() {
-            alert("This would simulate Telegram login.");
-            showSection('profile');
-        }
-
-        function addItem(name, category, description, image, price) {
-            items.push({ name, category, description, image, price });
-            renderItems();
-        }
-
-        function renderItems() {
-            const container = document.getElementById('itemsContainer');
-            container.innerHTML = '';
-            items.forEach(item => {
-                const div = document.createElement('div');
-                div.classList.add('item');
-                div.innerHTML = `
-                    <h3>${item.name}</h3>
-                    <p><strong>Category:</strong> ${item.category}</p>
-                    <p>${item.description}</p>
-                    <img src="${item.image}" alt="${item.name}">
-                    <p><strong>Price:</strong> ${item.price}</p>
-                    <button class="cart-button" onclick="addToCart('${item.name}')">Add to Cart</button>
-                    <button class="details-button" onclick="viewItemDetails('${item.name}')">View Details</button>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        function addToCart(itemName) {
-            const item = items.find(i => i.name === itemName);
-            if (item) {
-                cart.push(item);
-                alert(`${item.name} added to cart`);
-            }
-        }
-
-        function viewItemDetails(itemName) {
-            const item = items.find(i => i.name === itemName);
-            if (item) {
-                document.getElementById('modalItemName').textContent = item.name;
-                document.getElementById('modalItemCategory').textContent = item.category;
-                document.getElementById('modalItemDescription').textContent = item.description;
-                document.getElementById('modalItemPrice').textContent = item.price;
-                document.getElementById('modalItemImage').src = item.image;
-                document.getElementById('itemModal').style.display = 'flex';
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('itemModal').style.display = 'none';
-        }
-
-        function requestItem() {
-            alert('Item requested! Please arrange the details with the owner.');
-        }
-
-        function clearCart() {
-            cart = [];
-            alert("Cart cleared!");
-        }
-
-        function submitReport() {
-            const issue = document.getElementById('reportIssue').value;
-            alert('Your report has been submitted: ' + issue);
-        }
-
-        // Example: Pre-adding some items
-        addItem("Old Shirt", "Clothing", "A gently used shirt", "https://via.placeholder.com/100", "Free");
-        addItem("Old Phone", "Electronics", "A functional old phone", "https://via.placeholder.com/100", "Free");
-        addItem("Old Laptop", "Electronics", "A working laptop", "https://via.placeholder.com/100", "Free");
-        addItem("Old Couch", "Furniture", "A comfortable old couch", "https://via.placeholder.com/100", "Free");
-
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
