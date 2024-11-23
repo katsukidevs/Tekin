@@ -35,7 +35,7 @@ header h1 {
 
 nav {
     display: flex;
-    overflow-x:hidden;
+    overflow-x:scroll;
     background-color: #333;
     padding: 10px;
     justify-content: start;
@@ -66,6 +66,7 @@ nav button:hover {
 /* Updated container padding to create space for both header and nav */
 .container {
     padding: 120px 20px 20px; /* Increased padding-top to account for header + nav */
+    margin-top: 150px;
 }
 
 .hidden {
