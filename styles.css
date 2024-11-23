@@ -35,7 +35,7 @@ header h1 {
 
 nav {
     display: flex;
-    overflow-x:scroll;
+    overflow-x: scroll;
     background-color: #333;
     padding: 10px;
     justify-content: start;
@@ -65,22 +65,24 @@ nav button:hover {
 
 /* Updated container padding to create space for both header and nav */
 .container {
-    padding: 120px 20px 20px; /* Increased padding-top to account for header + nav */
-    margin-top: 150px;
+    padding: 20px 20px 20px 20px; /* Increased padding-top to account for header + nav */
+    margin-top: 125px;
 }
 
 .hidden {
     display: none;
 }
 
+/* Set item-grid to full width */
 .item-grid {
+    width: 90%; /* Full width */
     display: flex;
     flex-direction: column; /* Stack items vertically */
     gap: 20px; /* Space between items */
 }
 
 .item {
-    width: 100%; /* Make each item take the full width */
+    width: 100%; /* Ensure each item takes the full width of the grid */
     padding: 15px;
     margin-bottom: 15px;
     border: 1px solid #ddd;
@@ -99,7 +101,7 @@ nav button:hover {
     height: auto;
 }
 
-.cart-button, .request-button {
+.add-to-cart-button, .request-button {
     background-color: #007bff;
     color: white;
     border: none;
@@ -111,7 +113,7 @@ nav button:hover {
     margin-top: 10px;
 }
 
-.cart-button:hover, .request-button:hover {
+.add-to-cart-button:hover, .request-button:hover {
     background-color: #0056b3;
 }
 
@@ -122,7 +124,8 @@ nav button:hover {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
-    width: 100%;
+    width: 25%;
+    height: 10%;
 }
 
 .details-button:hover {
@@ -184,7 +187,7 @@ nav button:hover {
     }
 
     .item {
-        width: calc(50% - 20px); /* Adjust item width for smaller screens */
+        width: 100%; /* Make each item full width on small screens */
     }
 
     .floating-cart-btn {
